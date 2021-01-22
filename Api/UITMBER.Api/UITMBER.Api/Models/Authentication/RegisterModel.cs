@@ -1,26 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UITMBER.Api.DataModels
+namespace UITMBER.Api.Models.Authentication
 {
-    public class User
+    public class RegisterModel
     {
-        public long Id { get; set; }
-
-        public string Password { get; set; }
-
+        [MaxLength(128)]
         public string Email { get; set; }
+        [MaxLength(16)]
+        public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Photo { get; set; }
         public string PhoneNumber { get; set; }
-        public bool IsDriver { get; set; }
-
-        public double Lat { get; set; }
-        public double Long { get; set; }
-
-        public bool IsWorking { get; set; }
     }
 }
