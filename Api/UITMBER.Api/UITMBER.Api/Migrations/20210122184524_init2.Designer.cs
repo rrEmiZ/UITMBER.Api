@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UITMBER.Api.Data;
 
 namespace UITMBER.Api.Migrations
 {
     [DbContext(typeof(UDbContext))]
-    partial class UDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210122184524_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,13 +117,6 @@ namespace UITMBER.Api.Migrations
                     b.Property<double?>("DriverRate")
                         .HasColumnType("float");
 
-                    b.Property<DateTime?>("DriverRateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DriverRateInfo")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
                     b.Property<double>("EndLat")
                         .HasColumnType("float");
 
@@ -166,26 +161,6 @@ namespace UITMBER.Api.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("UITMBER.Api.DataModels.Payment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityColumn();
-
-                    b.Property<bool>("IsPaid")
-                        .HasColumnType("bit");
-
-                    b.Property<long>("OrderId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("UITMBER.Api.DataModels.User", b =>
@@ -328,17 +303,6 @@ namespace UITMBER.Api.Migrations
                     b.Navigation("Driver");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("UITMBER.Api.DataModels.Payment", b =>
-                {
-                    b.HasOne("UITMBER.Api.DataModels.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("UITMBER.Api.DataModels.UserApplication", b =>
