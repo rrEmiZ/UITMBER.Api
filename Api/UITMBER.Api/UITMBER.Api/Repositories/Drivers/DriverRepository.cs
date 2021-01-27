@@ -19,7 +19,7 @@ namespace UITMBER.Api.Repositories.Drivers
 
         public async Task<List<DriverDto>> GetDrivers()
         {
-            return await _dbContext.Users.Where(x => x.IsWorking && x.IsDriver)
+            return await _context.Users.Where(x => x.IsWorking && x.IsDriver)
                  .Select(x => new DriverDto()
                  {
                      Id = x.Id,

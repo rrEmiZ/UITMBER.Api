@@ -1,17 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UITMBER.Api.Configuration;
 using UITMBER.Api.DataModels;
+using UITMBER.Api.Extensions;
 using UITMBER.Api.Repositories.Favourites;
 using UITMBER.Api.Repositories.Favourites.Dto;
 
 namespace UITMBER.Api.Controllers
 {
+    /// <summary>
+    /// Author :  (w60084)
+    /// Changes : jjonca
+    /// </summary>
     [ApiController]
     [Route("[controller]/[action]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class UFLocationsController : ControllerBase
     {
         private readonly IFavouritesRepository _favouritesRepository;
@@ -69,12 +76,12 @@ namespace UITMBER.Api.Controllers
             }
         }
 
-        [HttpGet("{userId}")]
-        public async Task<List<UserFavouriteLocation>> GetMyLocations(long userId)
+        [HttpGet()]
+        public async Task<List<UserFavouriteLocation>> GetMyLocations()
         {
             try
             {
-                var result = await _favouritesRepository.GetMyLocationsAsync(userId);
+                var result = await _favouritesRepository.GetMyLocationsAsync(this.UserId());
 
                 if (result != null)
                 {

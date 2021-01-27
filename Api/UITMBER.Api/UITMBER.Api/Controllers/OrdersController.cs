@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UITMBER.Api.Configuration;
 using UITMBER.Api.DataModels;
+using UITMBER.Api.Enums;
 using UITMBER.Api.Extensions;
 using UITMBER.Api.Models.Order;
 using UITMBER.Api.Repositories.Orders;
@@ -14,7 +16,7 @@ namespace UITMBER.Api.Controllers
 {
 
     /// <summary>
-    /// Author : Kamilgolda, Karol Jarosz 60104
+    /// Author : Kamilgolda, Karol Jarosz 60104, w60089
     /// Changes : jjonca
     /// </summary>
     [ApiController]
@@ -50,6 +52,11 @@ namespace UITMBER.Api.Controllers
             return _orderRepository.GetClientOrderDetails(this.UserId());
         }
 
+        [HttpGet]
+        public List<string> GetLuggageTypes()
+        {
+            return Enum.GetNames(typeof(LuggageType)).ToList();
+        }
 
         [HttpGet]
         public double GetCost(DateTime date, double distance)
