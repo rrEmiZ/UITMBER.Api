@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +11,25 @@ using UITMBER.Api.Repositories.Aplication.Dto;
 
 namespace UITMBER.Api.Controllers
 {
+    /// <summary>
+    /// Author : w60083
+    /// Changes : jjonca
+    /// </summary>
     [ApiController]
     [Route("[controller]/[action]")]
-    public class AplicationController : Controller
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    public class ApplicationController : Controller
     {
-
-
         private readonly IAplicationRepository _AplicationRepository;
        
         private readonly AppSettings _appSettings;
 
-        public AplicationController(IAplicationRepository AplicationRepository, AppSettings appSettings)
+        public ApplicationController(IAplicationRepository AplicationRepository, AppSettings appSettings)
         {
             _AplicationRepository = AplicationRepository;
             _appSettings = appSettings;
         }
+
         [HttpPost]
         public async Task<IActionResult> SendApplication([FromBody] AplicationDto ApDto)
         {
@@ -46,11 +51,14 @@ namespace UITMBER.Api.Controllers
                 return BadRequest(ex.Message + " " + ex.InnerException);
             }
         }
-        [HttpGet("{userId}")]
-        public async Task<List<UserApplication>> GetMyApplications(long userId)
+
+        [HttpGet()]
+        public async Task<List<UserApplication>> GetMyApplications()
         {
             try
             {
+                var userId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
+
                 var result = await _AplicationRepository.GetMyApplications(userId);
 
                 if (result != null)
