@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UITMBER.Api.DataModels;
+using UITMBER.Api.Extensions;
 using UITMBER.Api.Models.Car;
 using UITMBER.Api.Repositories.Cars;
 using UITMBER.Api.Repositories.Cars.Dto;
@@ -34,8 +35,7 @@ namespace UITMBER.Api.Controllers
         public async Task<List<CarDto>> GetMyCars()
         {
             //Added user verify
-            var userId = Convert.ToInt64(User.FindFirst("UserId")?.Value);
-            var GetMyCarsResult = await _carRepository.GetMyCarsAsync(userId);
+            var GetMyCarsResult = await _carRepository.GetMyCarsAsync(this.UserId());
             return GetMyCarsResult;
 
         }
@@ -72,8 +72,7 @@ namespace UITMBER.Api.Controllers
             try
             {
                 //Added user verify
-                var userId = Convert.ToInt64(User.FindFirst("UserId")?.Value);
-                var updateResult = await _carRepository.UpdateCarAsync(car, userId);
+                var updateResult = await _carRepository.UpdateCarAsync(car, this.UserId());
 
                 if (updateResult)
                 {
@@ -105,8 +104,7 @@ namespace UITMBER.Api.Controllers
             try
             {
                 //Added user verify
-                var userId = Convert.ToInt64(User.FindFirst("UserId")?.Value);
-                var deleteResult = await _carRepository.DeleteAsync(id, userId);
+                var deleteResult = await _carRepository.DeleteAsync(id, this.UserId());
 
                 if (deleteResult)
                 {

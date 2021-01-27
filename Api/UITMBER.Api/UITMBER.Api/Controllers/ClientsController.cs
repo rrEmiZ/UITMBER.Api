@@ -12,6 +12,9 @@ using UITMBER.Api.Extensions;
 
 namespace UITMBER.Api.Controllers
 {
+    /// <summary>
+    /// Author : irinapukish
+    /// </summary>
     [ApiController]
     [Route("[controller]/[action]")]
     [Authorize(AuthenticationSchemes = "Bearer")]

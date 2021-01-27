@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UITMBER.Api.Configuration;
 using UITMBER.Api.DataModels;
+using UITMBER.Api.Extensions;
 using UITMBER.Api.Repositories.Aplication;
 using UITMBER.Api.Repositories.Aplication.Dto;
 
@@ -57,9 +58,8 @@ namespace UITMBER.Api.Controllers
         {
             try
             {
-                var userId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
 
-                var result = await _AplicationRepository.GetMyApplications(userId);
+                var result = await _AplicationRepository.GetMyApplications(this.UserId());
 
                 if (result != null)
                 {
