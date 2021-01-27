@@ -30,18 +30,20 @@ namespace UITMBER.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<DriverDto>> GetNerbyDriveresAsync(double latitude, double longitude)
+        public Task<List<DriverDto>> GetNearbyDrivers(double latitude, double longitude)
         {
+            //Pobieranie id usera z tokenu
+            var userId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
 
-            List<DriverDto> drivers = await _driverRepository.GetDrivers();
-            return drivers.Where(driver => Double.Equals(driver.Lat, latitude) && Double.Equals(driver.Long, longitude));
+
+            return _driverRepository.GetNearbyDrivers(latitude, longitude, userId);
         }
 
         [HttpGet]
-        public async Task<DriverDto> GetProfile(int id)
+        public Task<User> GetProfile()
         {
-            List<DriverDto> drivers = await _driverRepository.GetDrivers();
-            return drivers.Where(driver => driver.Id == id).FirstOrDefault();
+            var userId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
+            return _driverRepository.GetProfile(userId);
         }
     }
 }
