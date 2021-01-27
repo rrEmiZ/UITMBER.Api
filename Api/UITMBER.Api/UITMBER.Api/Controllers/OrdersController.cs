@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UITMBER.Api.Configuration;
 using UITMBER.Api.DataModels;
+using UITMBER.Api.Enums;
 using UITMBER.Api.Models.Order;
 using UITMBER.Api.Repositories.Orders;
+using UITMBER.Api.Repositories.Orders.Dto;
 
 namespace UITMBER.Api.Controllers
 {
@@ -92,6 +96,69 @@ namespace UITMBER.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex);
+            }
+        }
+
+        [HttpGet("{userId}")]
+        public async Task<List<MyOrdersDto>> GetMyOrders(long userId)
+        {
+            try
+            {
+                var result = await _orderRepository.GetMyOrders(userId);
+
+                if (result != null)
+                {
+                    return result;
+                }
+                else
+                {
+                    Console.WriteLine("Cannot find data!");
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        [HttpGet]
+        public List<string> GetCarTypes()
+        {
+            return Enum.GetNames(typeof(CarType)).ToList();
+
+        }
+
+        [HttpGet]
+        public List<string> GetLuggageTypes()
+        {
+            return Enum.GetNames(typeof(LuggageType)).ToList();
+        }
+
+        [HttpGet("{OrderId}")]
+        public async Task<OrderClientDetailsDto> GetClientOrderDetails(long OrderId)
+        {
+            try
+            {
+                var result = await _orderRepository.GetMyOrdersGetClientOrderDetails(OrderId);
+
+                if (result != null)
+                {
+                    return result;
+                }
+                else
+                {
+                    Console.WriteLine("Cannot find data!");
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
             }
         }
     }
