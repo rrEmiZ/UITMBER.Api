@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UITMBER.Api.Enums;
 
 namespace UITMBER.Api.Repositories.Orders.Dto
 {

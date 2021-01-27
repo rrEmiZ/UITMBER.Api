@@ -132,8 +132,8 @@ namespace UITMBER.Api.Repositories.Orders
             .Select(x => new OrdersDto()
             {
                 UserId = x.UserId,
-                ClientRating = x.ClientRating,
-                DriverRating = x.DriverRating,
+                ClientRating = x.ClientRate,
+                DriverRating = x.DriverRate,
                 FirstName = x.User.FirstName,
                 LastName = x.User.LastName,
                 Photo = x.User.Photo,
@@ -168,7 +168,7 @@ namespace UITMBER.Api.Repositories.Orders
                     StartLong = x.StartLong,
                     EndLong = x.EndLong,
                     Cost = x.Cost,
-                    DriverRating = x.DriverRating
+                    DriverRating = x.DriverRate
 
 
                 }).ToListAsync();
