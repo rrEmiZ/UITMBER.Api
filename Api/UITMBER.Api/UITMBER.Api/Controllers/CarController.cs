@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,35 +12,41 @@ using UITMBER.Api.Repositories.Cars.Dto;
 
 namespace UITMBER.Api.Controllers
 {
+    /// <summary>
+    /// Author : MelchenkoIvan
+    /// Changes : jjonca
+    /// </summary>
     [ApiController]
     [Route("[controller]/[action]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class CarController : ControllerBase
     {
-        private readonly ICarRepository _CarRepository;
+        private readonly ICarRepository _carRepository;
 
-       
-        public CarController(ICarRepository CarRepository)
+
+        public CarController(ICarRepository carRepository)
         {
-            _CarRepository = CarRepository;
+            _carRepository = carRepository;
         }
 
 
         [HttpGet]
-        public  async Task<List<CarDto>> GetMyCars()
+        public async Task<List<CarDto>> GetMyCars()
         {
-   
-                var GetMyCarsResult =  await _CarRepository.GetMyCarsAsync();
-                return GetMyCarsResult;
-            
+            //Added user verify
+            var userId = Convert.ToInt64(User.FindFirst("UserId")?.Value);
+            var GetMyCarsResult = await _carRepository.GetMyCarsAsync(userId);
+            return GetMyCarsResult;
+
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody]CarModel car)
+        public async Task<IActionResult> Add([FromBody] CarModel car)
         {
             try
             {
-                var addResult = await _CarRepository.AddAsync(car);
+                var addResult = await _carRepository.AddAsync(car);
                 if (addResult)
                 {
                     return Ok("Car is criated");
@@ -64,10 +71,11 @@ namespace UITMBER.Api.Controllers
         {
             try
             {
+                //Added user verify
+                var userId = Convert.ToInt64(User.FindFirst("UserId")?.Value);
+                var updateResult = await _carRepository.UpdateCarAsync(car, userId);
 
-                var UpdateResult = await _CarRepository.UpdateCarAsync(car);
-                
-                if (UpdateResult)
+                if (updateResult)
                 {
                     return Ok("Car is updated");
                 }
@@ -94,14 +102,13 @@ namespace UITMBER.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(long id)
         {
-
-          
             try
             {
+                //Added user verify
+                var userId = Convert.ToInt64(User.FindFirst("UserId")?.Value);
+                var deleteResult = await _carRepository.DeleteAsync(id, userId);
 
-                var DeleteResult = await _CarRepository.DeleteAsync(id);
-
-                if (DeleteResult)
+                if (deleteResult)
                 {
                     return Accepted();
                 }

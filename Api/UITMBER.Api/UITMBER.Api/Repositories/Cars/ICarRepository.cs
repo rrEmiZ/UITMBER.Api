@@ -11,9 +11,9 @@ namespace UITMBER.Api.Repositories.Cars
 {
     public interface ICarRepository 
     {
-        Task<List<CarDto>> GetMyCarsAsync();
+        Task<List<CarDto>> GetMyCarsAsync(long userId);
         Task<bool> AddAsync(CarModel car);
-        Task<bool> UpdateCarAsync(UpdateCarModel car);
-        Task<bool> DeleteAsync(long id);
+        Task<bool> UpdateCarAsync(UpdateCarModel car, long userId);
+        Task<bool> DeleteAsync(long id, long userId);
     }
 }

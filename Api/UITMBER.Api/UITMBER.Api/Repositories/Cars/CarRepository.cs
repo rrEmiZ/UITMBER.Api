@@ -42,19 +42,19 @@ namespace UITMBER.Api.Repositories.Cars
            
         }
 
-        public async Task<bool> DeleteAsync(long id)
+        public async Task<bool> DeleteAsync(long id, long userId)
         {
-            var car = await _context.Cars.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var car = await _context.Cars.Where(x => x.Id == id && x.UserId == userId).FirstOrDefaultAsync();
             _context.Cars.Remove(car);
             return await _context.SaveChangesAsync() > 0;
             
 
         }
 
-        public  Task<List<CarDto>> GetMyCarsAsync()
+        public  Task<List<CarDto>> GetMyCarsAsync(long userId)
         {
             
-            return  _context.Cars.Select(x => new CarDto()
+            return  _context.Cars.Where(x =>  x.UserId == userId).Select(x => new CarDto()
             {
                 Id = x.Id,
                 User = x.User,
@@ -72,24 +72,42 @@ namespace UITMBER.Api.Repositories.Cars
             
         }
 
-        public async Task<bool> UpdateCarAsync(UpdateCarModel car)
+        /// <summary>
+        /// BAD, It will not update existing entity, or possible bugs
+        /// </summary>
+        /// <param name="car"></param>
+        /// <returns></returns>
+        public async Task<bool> UpdateCarAsync(UpdateCarModel car, long userId)
         {
-            
-            var Caar = new Car
-            {
-                Id = car.Id,
-                UserId = car.UserId,
-                Model = car.Model,
-                Manufacturer = car.Manufacturer,
-                PlateNo = car.PlateNo,
-                Photo = car.Photo,
-                Year = car.Year,
-                Color = car.Color,
-                IsActive = car.IsActive
+            var cardb = await _context.Cars.Where(x => x.Id == car.Id && x.UserId == userId).FirstOrDefaultAsync();
 
-            };
-            _context.Cars.Update(Caar) ;
+           
+            cardb.UserId = car.UserId;
+            cardb.Model = car.Model;
+            cardb.Manufacturer = car.Manufacturer;
+            cardb.PlateNo = car.PlateNo;
+            cardb.Photo = car.Photo;
+            cardb.Year = car.Year;
+            cardb.Color = car.Color;
+            cardb.IsActive = car.IsActive;
+            _context.Cars.Update(cardb);
             return await _context.SaveChangesAsync() > 0;
+
+            //var Caar = new Car
+            //{
+            //    Id = car.Id,
+            //    UserId = car.UserId,
+            //    Model = car.Model,
+            //    Manufacturer = car.Manufacturer,
+            //    PlateNo = car.PlateNo,
+            //    Photo = car.Photo,
+            //    Year = car.Year,
+            //    Color = car.Color,
+            //    IsActive = car.IsActive
+
+            //};
+            //_context.Cars.Update(Caar) ;
+            //return await _context.SaveChangesAsync() > 0;
 
         }
 
