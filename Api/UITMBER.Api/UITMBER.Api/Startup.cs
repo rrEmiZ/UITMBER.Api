@@ -22,6 +22,7 @@ using UITMBER.Api.Repositories.Cars;
 using UITMBER.Api.Repositories.Drivers;
 
 using UITMBER.Api.Repositories.Favourites;
+using UITMBER.Api.Repositories.Locations;
 using UITMBER.Api.Repositories.Orders;
 
 
@@ -90,7 +91,9 @@ namespace UITMBER.Api
 
             services.AddTransient<IFavouritesRepository, FavouritesRepository>();
 
+            services.AddTransient<ILocationRepository, LocationRepository>();
 
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

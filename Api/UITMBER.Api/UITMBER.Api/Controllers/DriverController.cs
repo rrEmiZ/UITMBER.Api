@@ -10,6 +10,11 @@ using UITMBER.Api.Repositories.Drivers.Dto;
 
 namespace UITMBER.Api.Controllers
 {
+
+    /// <summary>
+    /// Author : LipaMar
+    /// </summary>
+
     [ApiController]
     [Route("[controller]/[action]")]
     [Authorize(AuthenticationSchemes = "Bearer")]
@@ -25,14 +30,18 @@ namespace UITMBER.Api.Controllers
         }
 
         [HttpGet]
-
-        public Task<List<DriverDto>> GetNearbyDrivers(double latitude, double longitude)
+        public async Task<IEnumerable<DriverDto>> GetNerbyDriveresAsync(double latitude, double longitude)
         {
-            //Pobieranie id usera z tokenu
-            var userId = Convert.ToInt32(User.FindFirst("UserId")?.Value);
 
+            List<DriverDto> drivers = await _driverRepository.GetDrivers();
+            return drivers.Where(driver => Double.Equals(driver.Lat, latitude) && Double.Equals(driver.Long, longitude));
+        }
 
-            return _driverRepository.GetNearbyDrivers(latitude, longitude);
+        [HttpGet]
+        public async Task<DriverDto> GetProfile(int id)
+        {
+            List<DriverDto> drivers = await _driverRepository.GetDrivers();
+            return drivers.Where(driver => driver.Id == id).FirstOrDefault();
         }
     }
 }

@@ -8,6 +8,6 @@ namespace UITMBER.Api.Repositories.Drivers
 {
     public interface IDriverRepository
     {
-        Task<List<DriverDto>> GetNearbyDrivers(double latitude, double longitude);
+        Task<List<DriverDto>> GetDrivers();
     }
 }

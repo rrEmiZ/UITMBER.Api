@@ -1,14 +1,22 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UITMBER.Api.Configuration;
 using UITMBER.Api.DataModels;
+using UITMBER.Api.Extensions;
 using UITMBER.Api.Models.Order;
 using UITMBER.Api.Repositories.Orders;
+using UITMBER.Api.Repositories.Orders.Dto;
 
 namespace UITMBER.Api.Controllers
 {
+
+    /// <summary>
+    /// Author : Kamilgolda, Karol Jarosz 60104
+    /// Changes : jjonca
+    /// </summary>
     [ApiController]
     [Route("[controller]/[action]")]
     [Authorize(AuthenticationSchemes = "Bearer")]
@@ -22,6 +30,26 @@ namespace UITMBER.Api.Controllers
             _orderRepository = orderRepository;
             _appSettings = appSettings;
         }
+
+
+        [HttpGet]
+        public Task<List<OrdersDto>> GetMyOrders()
+        {
+            return _orderRepository.GetMyOrders(this.UserId());
+        }
+
+        [HttpGet]
+        public Task<List<OrdersDto>> GetCarTypes()
+        {
+            return _orderRepository.GetCarTypes(this.UserId());
+        }
+
+        [HttpGet]
+        public Task<List<OrdersDto>> GetClientOrderDetails()
+        {
+            return _orderRepository.GetClientOrderDetails(this.UserId());
+        }
+
 
         [HttpGet]
         public double GetCost(DateTime date, double distance)

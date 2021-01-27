@@ -9,6 +9,10 @@ namespace UITMBER.Api.Repositories.Orders
 {
    public interface IOrderRepository
     {
+
+        Task<List<OrdersDto>> GetMyOrders(long userId);
+        Task<List<OrdersDto>> GetCarTypes(long userId);
+        Task<List<OrdersDto>> GetClientOrderDetails(long userId);
         public Task<NewOrderResultDto> NewOrderAsync(long userid, double startlat, double startlong, double endlat,
             double endlong, double distance, CarType type, double cost, OrderStatus status, PaymentType paymenttype, LuggageType luggagetype);
         public Task<NewOrderPaymentResultDto> NewOrderPayment(long orderId);

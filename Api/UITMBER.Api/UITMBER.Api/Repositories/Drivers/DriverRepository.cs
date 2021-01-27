@@ -17,6 +17,21 @@ namespace UITMBER.Api.Repositories.Drivers
             _context = context;
         }
 
+        public async Task<List<DriverDto>> GetDrivers()
+        {
+            return await _dbContext.Users.Where(x => x.IsWorking && x.IsDriver)
+                 .Select(x => new DriverDto()
+                 {
+                     Id = x.Id,
+                     Email = x.Email,
+                     FirstName = x.FirstName,
+                     LastName = x.LastName,
+                     Lat = x.Lat,
+                     Long = x.Long,
+                     PhoneNumber = x.PhoneNumber,
+                     Photo = x.Photo
+                 }).ToListAsync();
+        }
 
         public Task<List<DriverDto>> GetNearbyDrivers(double latitude, double longitude)
         {
