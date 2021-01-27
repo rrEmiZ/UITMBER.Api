@@ -92,6 +92,8 @@ namespace UITMBER.Api
 
             services.AddTransient<IFavouritesRepository, FavouritesRepository>();
 
+            services.AddTransient<ILocationRepository, LocationRepository>();
+
 
         }
 
