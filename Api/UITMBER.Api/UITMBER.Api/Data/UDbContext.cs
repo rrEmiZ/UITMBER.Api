@@ -15,6 +15,7 @@ namespace UITMBER.Api.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         public UDbContext(DbContextOptions<UDbContext> dbContextOptions) : base(dbContextOptions)
         {

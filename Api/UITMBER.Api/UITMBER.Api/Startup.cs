@@ -18,6 +18,7 @@ using UITMBER.Api.Configuration;
 using UITMBER.Api.Data;
 using UITMBER.Api.Repositories.Auth;
 using UITMBER.Api.Repositories.Drivers;
+using UITMBER.Api.Repositories.Orders;
 
 namespace UITMBER.Api
 {
@@ -68,6 +69,11 @@ namespace UITMBER.Api
             });
 
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
+
+
+            services.AddTransient<IOrderRepository, OrderRepository>();
+
+
             services.AddTransient<IDriverRepository, DriverRepository>();
             services.AddTransient<IClientRepository, ClientRepository>();
         }

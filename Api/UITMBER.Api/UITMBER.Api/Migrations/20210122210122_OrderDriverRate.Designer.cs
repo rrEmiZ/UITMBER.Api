@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UITMBER.Api.Data;
 
 namespace UITMBER.Api.Migrations
 {
     [DbContext(typeof(UDbContext))]
-    partial class UDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210122210122_OrderDriverRate")]
+    partial class OrderDriverRate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
