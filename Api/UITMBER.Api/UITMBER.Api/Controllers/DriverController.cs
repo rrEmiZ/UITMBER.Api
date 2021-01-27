@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UITMBER.Api.Configuration;
 using UITMBER.Api.Repositories.Drivers;
 using UITMBER.Api.Repositories.Drivers.Dto;
 
@@ -15,10 +16,12 @@ namespace UITMBER.Api.Controllers
     public class DriverController : ControllerBase
     {
         private readonly IDriverRepository _driverRepository;
+        private readonly AppSettings _appSettings;
 
-        public DriverController(IDriverRepository driverRepository)
+        public DriverController(IDriverRepository driverRepository, AppSettings appSettings)
         {
             _driverRepository = driverRepository;
+            _appSettings = appSettings;
         }
 
         [HttpGet]

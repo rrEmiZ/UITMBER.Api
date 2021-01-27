@@ -10,5 +10,7 @@ namespace UITMBER.Api.Configuration
         public string JWTSecurityKey { get; set; }
         public string JWTIssuer { get; set; }
         public string JWTAudience { get; set; }
+
+        public double CostMultiply { get; set; }        
     }
 }

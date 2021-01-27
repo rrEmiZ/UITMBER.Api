@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UITMBER.Api.Data;
 
 namespace UITMBER.Api.Migrations
 {
     [DbContext(typeof(UDbContext))]
-    partial class UDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210122202818_Payments")]
+    partial class Payments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,13 +116,6 @@ namespace UITMBER.Api.Migrations
 
                     b.Property<double?>("DriverRate")
                         .HasColumnType("float");
-
-                    b.Property<DateTime?>("DriverRateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DriverRateInfo")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
 
                     b.Property<double>("EndLat")
                         .HasColumnType("float");

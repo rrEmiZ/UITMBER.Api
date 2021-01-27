@@ -19,6 +19,7 @@ using UITMBER.Api.Data;
 using UITMBER.Api.Repositories.Auth;
 using UITMBER.Api.Repositories.Cars;
 using UITMBER.Api.Repositories.Drivers;
+using UITMBER.Api.Repositories.Orders;
 
 namespace UITMBER.Api
 {
@@ -40,11 +41,9 @@ namespace UITMBER.Api
             services.AddAuthorization();
 
             ConfigureAuthentication(ref services);
-        
 
-            services.AddSwaggerGen(s => {
-
-
+            services.AddSwaggerGen(s =>
+            {
                 s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme (Example: 'Bearer 12345abcdef')",
@@ -55,29 +54,32 @@ namespace UITMBER.Api
                 });
 
                 s.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
                 {
-                    new OpenApiSecurityScheme
                     {
-                        Reference = new OpenApiReference
+                        new OpenApiSecurityScheme
                         {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    Array.Empty<string>()
-                }
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
-            }
-
-
-              );
 
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
+
+
+            services.AddTransient<IOrderRepository, OrderRepository>();
+
+
             services.AddTransient<ICarRepository, CarRepository>();
 
 
             services.AddTransient<IDriverRepository, DriverRepository>();
+            services.AddTransient<IClientRepository, ClientRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
