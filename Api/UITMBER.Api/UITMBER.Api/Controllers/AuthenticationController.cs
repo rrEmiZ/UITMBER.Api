@@ -11,6 +11,9 @@ using UITMBER.Api.Repositories.Auth;
 
 namespace UITMBER.Api.Controllers
 {
+    /// <summary>
+    /// Author : jjonca
+    /// </summary>
     [ApiController]
     [Route("[controller]/[action]")]
     [AllowAnonymous]
