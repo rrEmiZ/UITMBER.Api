@@ -17,6 +17,7 @@ using Microsoft.OpenApi.Models;
 using UITMBER.Api.Configuration;
 using UITMBER.Api.Data;
 using UITMBER.Api.Repositories.Auth;
+using UITMBER.Api.Repositories.Cars;
 using UITMBER.Api.Repositories.Drivers;
 using UITMBER.Api.Repositories.Orders;
 
@@ -72,6 +73,9 @@ namespace UITMBER.Api
 
 
             services.AddTransient<IOrderRepository, OrderRepository>();
+
+
+            services.AddTransient<ICarRepository, CarRepository>();
 
 
             services.AddTransient<IDriverRepository, DriverRepository>();
