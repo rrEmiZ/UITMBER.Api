@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace UITMBER.Api.Migrations
 {
@@ -12,11 +13,11 @@ namespace UITMBER.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MoneyDisc = table.Column<double>(type: "float", nullable: false),
-                    PercentDisc = table.Column<double>(type: "float", nullable: false),
-                    Limit = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Code = table.Column<string>(type: "text", nullable: true),
+                    MoneyDisc = table.Column<double>(type: "double precision", nullable: false),
+                    PercentDisc = table.Column<double>(type: "double precision", nullable: false),
+                    Limit = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,16 +29,17 @@ namespace UITMBER.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDriver = table.Column<bool>(type: "bit", nullable: false),
-                    Lat = table.Column<double>(type: "float", nullable: false),
-                    Long = table.Column<double>(type: "float", nullable: false),
-                    IsWorking = table.Column<bool>(type: "bit", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Password = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    FirstName = table.Column<string>(type: "text", nullable: true),
+                    LastName = table.Column<string>(type: "text", nullable: true),
+                    Photo = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    IsDriver = table.Column<bool>(type: "boolean", nullable: false),
+                    Lat = table.Column<double>(type: "double precision", nullable: false),
+                    Long = table.Column<double>(type: "double precision", nullable: false),
+                    IsWorking = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,16 +51,16 @@ namespace UITMBER.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PlateNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Year = table.Column<int>(type: "int", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    Model = table.Column<string>(type: "text", nullable: true),
+                    Manufacturer = table.Column<string>(type: "text", nullable: true),
+                    PlateNo = table.Column<string>(type: "text", nullable: true),
+                    Photo = table.Column<string>(type: "text", nullable: true),
+                    Year = table.Column<int>(type: "integer", nullable: false),
+                    Color = table.Column<string>(type: "text", nullable: true),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,11 +78,11 @@ namespace UITMBER.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Lat = table.Column<double>(type: "float", nullable: false),
-                    Long = table.Column<double>(type: "float", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Lat = table.Column<double>(type: "double precision", nullable: false),
+                    Long = table.Column<double>(type: "double precision", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,24 +100,27 @@ namespace UITMBER.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StartLat = table.Column<double>(type: "float", nullable: false),
-                    StartLong = table.Column<double>(type: "float", nullable: false),
-                    EndLat = table.Column<double>(type: "float", nullable: false),
-                    EndLong = table.Column<double>(type: "float", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    StartLat = table.Column<double>(type: "double precision", nullable: false),
+                    StartLong = table.Column<double>(type: "double precision", nullable: false),
+                    EndLat = table.Column<double>(type: "double precision", nullable: false),
+                    EndLong = table.Column<double>(type: "double precision", nullable: false),
+                    Distance = table.Column<double>(type: "double precision", nullable: false),
+                    Type = table.Column<int>(type: "integer", nullable: false),
                     CarId = table.Column<long>(type: "bigint", nullable: true),
                     DriverId = table.Column<long>(type: "bigint", nullable: true),
-                    Cost = table.Column<double>(type: "float", nullable: false),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    PaymentType = table.Column<int>(type: "int", nullable: false),
-                    LuggageType = table.Column<int>(type: "int", nullable: false),
-                    DriverRate = table.Column<double>(type: "float", nullable: true),
-                    ClientRate = table.Column<double>(type: "float", nullable: true),
+                    Cost = table.Column<double>(type: "double precision", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    EndTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    PaymentType = table.Column<int>(type: "integer", nullable: false),
+                    LuggageType = table.Column<int>(type: "integer", nullable: false),
+                    DriverRate = table.Column<double>(type: "double precision", nullable: true),
+                    DriverRateDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    DriverRateInfo = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true),
+                    ClientRate = table.Column<double>(type: "double precision", nullable: true),
                     DiscountId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
@@ -126,25 +131,25 @@ namespace UITMBER.Api.Migrations
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Orders_Discounts_DiscountId",
                         column: x => x.DiscountId,
                         principalTable: "Discounts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Orders_Users_DriverId",
                         column: x => x.DriverId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Orders_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,12 +157,12 @@ namespace UITMBER.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Accepted = table.Column<bool>(type: "bit", nullable: false),
-                    DriverLicenceNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DriverLicencePhoto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Accepted = table.Column<bool>(type: "boolean", nullable: false),
+                    DriverLicenceNo = table.Column<string>(type: "text", nullable: true),
+                    DriverLicencePhoto = table.Column<string>(type: "text", nullable: true),
                     CarId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -168,13 +173,33 @@ namespace UITMBER.Api.Migrations
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserApplications_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    OrderId = table.Column<long>(type: "bigint", nullable: false),
+                    IsPaid = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Payments_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -203,6 +228,11 @@ namespace UITMBER.Api.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Payments_OrderId",
+                table: "Payments",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserApplications_CarId",
                 table: "UserApplications",
                 column: "CarId");
@@ -221,7 +251,7 @@ namespace UITMBER.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "UserApplications");
@@ -230,10 +260,13 @@ namespace UITMBER.Api.Migrations
                 name: "UserFavouriteLocations");
 
             migrationBuilder.DropTable(
-                name: "Discounts");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Cars");
+
+            migrationBuilder.DropTable(
+                name: "Discounts");
 
             migrationBuilder.DropTable(
                 name: "Users");

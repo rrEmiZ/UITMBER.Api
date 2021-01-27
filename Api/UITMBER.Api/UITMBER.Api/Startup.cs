@@ -42,7 +42,7 @@ namespace UITMBER.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<UDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<UDbContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Default")));
             
             services.AddAuthorization();
 
