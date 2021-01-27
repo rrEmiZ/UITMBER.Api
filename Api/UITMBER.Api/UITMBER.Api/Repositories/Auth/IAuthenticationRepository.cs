@@ -11,6 +11,5 @@ namespace UITMBER.Api.Repositories.Auth
         Task<LoginResultDto> AuthenticateAsync(string login, string password);
         string GenerateToken(LoginResultDto loginResult, AppSettings appSettings);
         Task<LoginResultDto> RegisterAsync(string email, string password, string firstName, string lastName, string phoneNumber, string photo);
-
     }
 }

@@ -105,7 +105,5 @@ namespace UITMBER.Api.Repositories.Auth
                 Roles = "Client"
             };
         }
-
-
     }
 }
