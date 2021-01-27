@@ -20,6 +20,7 @@ using UITMBER.Api.Repositories.Aplication;
 using UITMBER.Api.Repositories.Auth;
 using UITMBER.Api.Repositories.Cars;
 using UITMBER.Api.Repositories.Discounts;
+using UITMBER.Api.Repositories.DriverOrders;
 using UITMBER.Api.Repositories.Drivers;
 
 using UITMBER.Api.Repositories.Favourites;
@@ -87,7 +88,7 @@ namespace UITMBER.Api
             services.AddTransient<IDriverRepository, DriverRepository>();
 
            services.AddTransient<IAplicationRepository, AplicationRepository>();
-
+            services.AddTransient<IDriverOrdersRepository, DriverOrdersRepository>();
 
 
             services.AddTransient<IFavouritesRepository, FavouritesRepository>();

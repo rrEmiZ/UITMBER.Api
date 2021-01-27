@@ -53,7 +53,13 @@ namespace UITMBER.Api.DataModels
         [MaxLength(300)]
         public string DriverRateInfo { get; set; }
 
+        //Ocena klienta przez kierowce
+        [Range(1.0, 5.0)]
         public double? ClientRate { get; set; }
+        public DateTime? ClientRateDate { get; set; }
+
+        [MaxLength(300)]
+        public string ClientRateInfo { get; set; }
 
         [ForeignKey(nameof(DiscountId))]
         public Discount Discount { get; set; }
