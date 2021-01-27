@@ -13,5 +13,8 @@ namespace UITMBER.Api.Repositories.Orders
             double endlong, double distance, CarType type, double cost, OrderStatus status, PaymentType paymenttype, LuggageType luggagetype);
         public Task<NewOrderPaymentResultDto> NewOrderPayment(long orderId);
         public Task<ClientOrderResultDto> ClientRate(long idOrder, double driverRate, string info, int userid);
+
+        Task<List<MyOrdersDto>> GetMyOrders(long userId);
+        Task<OrderClientDetailsDto> GetMyOrdersGetClientOrderDetails(long UserId);
     }
 }

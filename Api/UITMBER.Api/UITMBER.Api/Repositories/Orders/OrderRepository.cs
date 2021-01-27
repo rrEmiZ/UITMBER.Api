@@ -125,5 +125,66 @@ namespace UITMBER.Api.Repositories.Orders
             }
             
         }
+
+        public async Task<List<MyOrdersDto>> GetMyOrders(long userId)
+        {
+
+            try
+            {
+                var UserOrderList = await _context.Orders.Select
+                (x => new MyOrdersDto()
+                {
+                    DriverId = x.DriverId,
+                    UserId = x.UserId,
+                    OrderId = x.Id
+                }).Where(u => u.UserId == userId).ToListAsync();
+
+                foreach (var order in UserOrderList)
+                {
+                    var user = await _context.Users.FindAsync(order.UserId);
+                    var driver = await _context.Users.FindAsync(order.DriverId);
+
+                    order.UserEmail = user.Email;
+                    order.UserFirstName = user.FirstName;
+                    order.UserLastName = user.LastName;
+
+                    order.DriverEmail = driver.Email;
+                    order.DriverFirstName = driver.FirstName;
+                    order.DriverLastName = driver.LastName;
+                }
+
+                return UserOrderList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public async Task<OrderClientDetailsDto> GetMyOrdersGetClientOrderDetails(long OrderId)
+        {
+            try
+            {
+                var order = await _context.Orders.FindAsync(OrderId);
+
+                var clientdetails = new OrderClientDetailsDto()
+                {
+                    OrderId = order.Id,
+                    StartLat = order.StartLat,
+                    StartLong = order.StartLong,
+                    EndLat = order.EndLat,
+                    EndLong = order.EndLong,
+                    DriverId = order.DriverId
+                };
+
+                return clientdetails;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
     }
 }
