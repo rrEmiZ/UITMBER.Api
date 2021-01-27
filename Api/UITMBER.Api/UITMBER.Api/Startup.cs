@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using UITMBER.Api.Configuration;
 using UITMBER.Api.Data;
+using UITMBER.Api.Repositories.Aplication;
 using UITMBER.Api.Repositories.Auth;
 using UITMBER.Api.Repositories.Cars;
 using UITMBER.Api.Repositories.Drivers;
@@ -82,6 +83,9 @@ namespace UITMBER.Api
 
 
             services.AddTransient<IDriverRepository, DriverRepository>();
+
+           services.AddTransient<IAplicationRepository, AplicationRepository>();
+
 
 
             services.AddTransient<IFavouritesRepository, FavouritesRepository>();
