@@ -15,7 +15,7 @@ namespace UITMBER.Api.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class OrdersController : ControllerBase
     {
         private readonly IOrderRepository _orderRepository;
