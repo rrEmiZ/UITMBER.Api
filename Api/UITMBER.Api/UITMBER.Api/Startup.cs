@@ -19,6 +19,7 @@ using UITMBER.Api.Data;
 using UITMBER.Api.Repositories.Aplication;
 using UITMBER.Api.Repositories.Auth;
 using UITMBER.Api.Repositories.Cars;
+using UITMBER.Api.Repositories.Discounts;
 using UITMBER.Api.Repositories.Drivers;
 
 using UITMBER.Api.Repositories.Favourites;
@@ -41,7 +42,7 @@ namespace UITMBER.Api
         {
             services.AddControllers();
             services.AddDbContext<UDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Default")));
-
+            
             services.AddAuthorization();
 
             ConfigureAuthentication(ref services);
@@ -89,6 +90,8 @@ namespace UITMBER.Api
 
 
             services.AddTransient<IFavouritesRepository, FavouritesRepository>();
+
+            services.AddTransient<IDiscountRepository, DiscountRepository>();
 
 
         }
