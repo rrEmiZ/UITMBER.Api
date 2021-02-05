@@ -76,21 +76,12 @@ namespace UITMBER.Api
             });
 
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
-
-
             services.AddTransient<IOrderRepository, OrderRepository>();
-
-
             services.AddTransient<ICarRepository, CarRepository>();
-
-
             services.AddTransient<IDriverRepository, DriverRepository>();
-
-           services.AddTransient<IAplicationRepository, AplicationRepository>();
-
-
-
+            services.AddTransient<IAplicationRepository, AplicationRepository>();
             services.AddTransient<IFavouritesRepository, FavouritesRepository>();
+            services.AddTransient<ILocationRepository, LocationRepository>();
 
 
         }
