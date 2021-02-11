@@ -6,29 +6,36 @@ using System.Threading.Tasks;
 using UITMBER.Api.Data;
 using UITMBER.Api.DataModels;
 using UITMBER.Api.Repositories.Cars.Dto;
+using UITMBER.Api.Repositories.Locations.Dto;
 
 namespace UITMBER.Api.Repositories.Locations
 {
     public class LocationRepository : ILocationRepository
     {
-        private readonly UDbContext _dbContext;
+        private readonly UDbContext _context;
 
-        public LocationRepository(UDbContext dbContext)
+        public LocationRepository(UDbContext Context)
         {
-            _dbContext = dbContext;
+            _context = Context;
         }
-        public bool SaveLocation(long id, double lat, double longitude)
+        public async Task<SaveLocationDto> SaveMyLocation(long id, double latitude, double longitude)
         {
-            User user = _dbContext.Users.Where(x => x.Id == id).FirstOrDefault();
-            if (user != null)
+            User result = await (from p in _context.Users
+                                 where p.Id == id
+                                 select p).FirstOrDefaultAsync();
+
+            result.Lat = latitude;
+            result.Long = longitude;
+
+            _context.Users.Update(result);
+            await _context.SaveChangesAsync();
+
+            return new SaveLocationDto()
             {
-                user.Lat = lat;
-                user.Long = longitude;
-                _dbContext.Entry(user).State = EntityState.Modified;
-                _dbContext.SaveChanges();
-                return true;
-            }
-            return false;
+                Success = true,
+                Latitude = result.Lat,
+                Longitude = result.Long
+            };
         }
 
     }
