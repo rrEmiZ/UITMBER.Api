@@ -8,6 +8,7 @@ namespace UITMBER.Api.Repositories.Orders.Dto
 {
     public class OrdersDto
     {
+        public long Id { get; set; }
         public long UserId { get; set; }
         public long DriverId { get; set; }
         public double? ClientRating { get; set; }

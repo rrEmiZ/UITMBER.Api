@@ -137,7 +137,9 @@ namespace UITMBER.Api.Repositories.Orders
                 FirstName = x.User.FirstName,
                 LastName = x.User.LastName,
                 Photo = x.User.Photo,
-                PhoneNumber = x.User.PhoneNumber
+                PhoneNumber = x.User.PhoneNumber,
+                OrderId = x.Id
+                
 
             }).ToListAsync();
         }
@@ -168,7 +170,8 @@ namespace UITMBER.Api.Repositories.Orders
                     StartLong = x.StartLong,
                     EndLong = x.EndLong,
                     Cost = x.Cost,
-                    DriverRating = x.DriverRate
+                    DriverRating = x.DriverRate,
+                    OrderId = x.Id
 
 
                 }).ToListAsync();
