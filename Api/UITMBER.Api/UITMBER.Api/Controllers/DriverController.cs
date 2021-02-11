@@ -34,7 +34,7 @@ namespace UITMBER.Api.Controllers
         {
 
             List<DriverDto> drivers = await _driverRepository.GetDrivers();
-            return drivers.Where(driver => Double.Equals(driver.Lat, latitude) && Double.Equals(driver.Long, longitude));
+            return drivers;
         }
 
         [HttpGet]

@@ -24,11 +24,14 @@ namespace UITMBER.Api.Repositories.Locations
             {
                 user.Lat = lat;
                 user.Long = longitude;
+                user.IsWorking = true;
                 _dbContext.Entry(user).State = EntityState.Modified;
                 _dbContext.SaveChanges();
-                return true;
+                //return true;
             }
-            return false;
+
+          
+            return true;
         }
 
     }

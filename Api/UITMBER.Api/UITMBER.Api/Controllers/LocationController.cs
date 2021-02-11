@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UITMBER.Api.Extensions;
+using UITMBER.Api.Models;
 using UITMBER.Api.Repositories.Locations;
 
 namespace UITMBER.Api.Controllers
@@ -24,21 +26,24 @@ namespace UITMBER.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveMyLocation(long id, double lat, double longitude)
+        public IActionResult SaveMyLocation([FromBody] LocationRequest input)
         {
-            if (!areCoordinatesCorrect(lat, longitude))
+            if (!areCoordinatesCorrect(input.lat, input.longitude))
             {
                 return BadRequest("Given coordiantes are incorrect");
             }
-            bool modified = _locationRepository.SaveLocation(id, lat, longitude);
+            bool modified = _locationRepository.SaveLocation(this.UserId(), input.lat, input.longitude);
             if (modified) return Ok();
             return NotFound("User not found");
         }
 
         private bool areCoordinatesCorrect(double lat, double longitude)
         {
-            return lat >= -90 && lat <= 90 && longitude >= -180 && longitude <= 180;
+            return (lat >= -90 || lat <= 90) && (longitude >= -180 || longitude <= 180);
         }
 
+  
     }
+
+
 }
