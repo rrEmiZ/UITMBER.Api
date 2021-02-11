@@ -41,9 +41,9 @@ namespace UITMBER.Api.Controllers
         }
 
         [HttpGet]
-        public Task<List<OrdersDto>> GetCarTypes()
+        public List<CarType> GetCarTypes()
         {
-            return _orderRepository.GetCarTypes(this.UserId());
+            return Enum.GetNames(typeof(CarType)).Cast<CarType>().ToList();
         }
 
         [HttpGet]
@@ -53,9 +53,9 @@ namespace UITMBER.Api.Controllers
         }
 
         [HttpGet]
-        public List<string> GetLuggageTypes()
+        public List<LuggageType> GetLuggageTypes()
         {
-            return Enum.GetNames(typeof(LuggageType)).ToList();
+            return Enum.GetNames(typeof(LuggageType)).Cast<LuggageType>().ToList();
         }
 
         [HttpGet]

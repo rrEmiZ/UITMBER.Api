@@ -44,7 +44,7 @@ namespace UITMBER.Api.Repositories.Auth
                 Success = true,
                 Name = user.Email,
                 Id = user.Id,
-                Photo = user.Photo,
+                Photo = "",
                 Roles = user.IsDriver ? "Driver" : "Client"
             };
         }

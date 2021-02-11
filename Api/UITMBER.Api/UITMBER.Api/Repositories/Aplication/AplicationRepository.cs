@@ -25,7 +25,7 @@ namespace UITMBER.Api.Repositories.Aplication
                 var aplicationsList = await _dbContext.UserApplications.Select
                 (x => new UserApplication()
                 {
-                    DriverLicencePhoto = x.DriverLicencePhoto,
+                    DriverLicencePhoto ="",// x.DriverLicencePhoto,
                     UserId =x.UserId,
                     Date = x.Date,
                     DriverLicenceNo = x.DriverLicenceNo,
@@ -46,7 +46,7 @@ namespace UITMBER.Api.Repositories.Aplication
         {
             UserApplication newAplication = new UserApplication()
             {
-                DriverLicencePhoto = ApDto.DriverLicencePhoto,
+                DriverLicencePhoto = "",// ApDto.DriverLicencePhoto,
                 UserId = ApDto.UserId,
                 Date = ApDto.Date,
                 DriverLicenceNo = ApDto.DriverLicenceNo,

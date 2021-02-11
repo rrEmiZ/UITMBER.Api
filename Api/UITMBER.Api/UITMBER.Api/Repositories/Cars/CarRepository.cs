@@ -30,7 +30,7 @@ namespace UITMBER.Api.Repositories.Cars
                 Model = car.Model,
                 Manufacturer = car.Manufacturer,
                 PlateNo = car.PlateNo,
-                Photo = car.Photo,
+                Photo = "",//car.Photo,
                 Year = car.Year,
                 Color = car.Color,
                 Type = car.Type,

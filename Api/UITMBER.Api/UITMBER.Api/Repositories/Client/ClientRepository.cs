@@ -52,7 +52,7 @@ namespace UITMBER.Api.Repositories.Auth
             if (user == null)
                 return false;
 
-            user.Photo = base64Photo;
+            user.Photo = "";//base64Photo;
 
             _dbContext.Users.Update(user);
             await _dbContext.SaveChangesAsync();
