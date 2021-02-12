@@ -36,6 +36,9 @@ namespace UITMBER.Api.Controllers
         {
             try
             {
+                ApDto.UserId = this.UserId();
+
+
                 var result = await _AplicationRepository.SendApplication(ApDto);
                 if (result)
                 {
