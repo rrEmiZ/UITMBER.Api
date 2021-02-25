@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UITMBER.Api.Data;
+using UITMBER.Api.DataModels;
 using UITMBER.Api.Repositories.Users.Dto;
 
 namespace UITMBER.Api.Repositories.Users
@@ -55,6 +56,32 @@ namespace UITMBER.Api.Repositories.Users
                 throw;
             }
             return false;
+        }
+
+        public async Task<List<UserApplication>> GetAllApplications()
+        {
+
+            try
+            {
+                var aplicationsList = await _context.UserApplications
+                .ToListAsync();
+
+                return aplicationsList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public async Task SetAccepted(long id)
+        {
+            var app = await _context.UserApplications.Where(x => x.Id == id).FirstOrDefaultAsync();
+            app.Accepted = true;
+            _context.UserApplications.Update(app);
+            await _context.SaveChangesAsync();
+
         }
     }
 }

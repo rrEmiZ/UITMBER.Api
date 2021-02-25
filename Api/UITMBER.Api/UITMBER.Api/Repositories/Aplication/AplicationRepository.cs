@@ -17,6 +17,9 @@ namespace UITMBER.Api.Repositories.Aplication
             _dbContext = context;
         }
 
+
+       
+
         public async Task<List<UserApplication>> GetMyApplications(long userId)
         {
 
@@ -25,8 +28,8 @@ namespace UITMBER.Api.Repositories.Aplication
                 var aplicationsList = await _dbContext.UserApplications.Select
                 (x => new UserApplication()
                 {
-                    DriverLicencePhoto ="",// x.DriverLicencePhoto,
-                    UserId =x.UserId,
+                    DriverLicencePhoto = "",// x.DriverLicencePhoto,
+                    UserId = x.UserId,
                     Date = x.Date,
                     DriverLicenceNo = x.DriverLicenceNo,
                     CarId = x.CarId,
@@ -51,7 +54,7 @@ namespace UITMBER.Api.Repositories.Aplication
                 Date = ApDto.Date,
                 DriverLicenceNo = ApDto.DriverLicenceNo,
                 CarId = ApDto.CarId,
-                
+
             };
 
             await _dbContext.UserApplications.AddAsync(newAplication);
